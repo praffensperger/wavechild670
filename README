@@ -3,6 +3,10 @@ Wave digital filter based emulation of a famous 1950's tube stereo limiter
 By Peter Raffensperger
 10 July 2012
 
+A command line simulation of a tube electronic circuit for music production, developed for research
+purposes to demonstrate a model that will be presented at the 15th International Conference on 
+Digital Audio Effects (DAFx-12) in September 2012.
+
 License:
 GNU GPL v2
 Please contact the author to discuss options for including Wavechild670 in your closed source 
