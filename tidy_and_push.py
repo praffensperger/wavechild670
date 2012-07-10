@@ -61,7 +61,7 @@ def commit():
 
 def push_to_google_code():
 	print "Pushing changes to Google code git respository..."
-	os.system('git push https://code.google.com/p/turn-taking-measurement-tools/ master')
+	os.system('git push https://code.google.com/p/wavechild670/ master')
 
 def make_source_distribution():
 	print "Making source distribution file..."
@@ -69,8 +69,9 @@ def make_source_distribution():
 
 def make_pdf_sphinx_documentation():
 	print "Making pdf documentation..."
-	os.system('cd docs; make latexpdf')
-	os.system('cp docs/_build/latex/Turn-TakingMeasurementTools.pdf turntakingmeasurementtools_manual.pdf')
+	fail
+	#os.system('cd docs; make latexpdf')
+	#os.system('cp docs/_build/latex/Turn-TakingMeasurementTools.pdf turntakingmeasurementtools_manual.pdf')
 
 add_file_headers_and_do_search_and_replace()
 #run_tests()	
