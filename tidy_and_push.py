@@ -13,7 +13,8 @@ from projectinfo import *
 
 def add_file_headers_and_do_search_and_replace():
 	CPP_EXTENSIONS = ['.h', '.cpp']
-	EXCEPTIONS = ['tidy_and_push.py', 'projectinfo.py', 'gnuplot_i.h', 'gnuplot_i.cpp', 'getout_pp.cpp', 'getout_pp.h',]
+	PYTHON_EXTENSIONS = ['.py']
+	EXCEPTIONS = ['tidy_and_push.py', 'projectinfo.py', 'gnuplot_i.h', 'gnuplot_i.cpp', 'getopt_pp.cpp', 'getopt_pp.h',]
 	SEARCH_AND_REPLACE = {'__version__ =.*?\n': '__version__ = "' + VERSION + '"\n',
 		'turntakingmeasurementtoolsversion =.*?\n': 'turntakingmeasurementtoolsversion = "' + VERSION + '"\n',
 	}
@@ -21,16 +22,20 @@ def add_file_headers_and_do_search_and_replace():
 		for f in files:
 			fpath = os.path.join(root, f)
 			extension = os.path.splitext(f)[1]
-			if extension in CPP_EXTENSIONS and f not in EXCEPTIONS:
+			
+			def modify(bannerStart, bannerEnd, commentStarter=''):
 				print "Modifying", fpath
 				ff = open(fpath, 'r')
 				contents = ff.read()
 				ff.close()
-				endOfHeader = contents.rfind(BANNER)
-				header = HEADER
+				endOfHeader = contents.rfind(bannerEnd)
+				header = bannerStart + '\n' + HEADER
 				header = header.replace('%filename%', f)
+				header = header.replace('\n', '\n' + commentStarter)
+				header = header + '\n' + bannerEnd
+
 				if endOfHeader > 0:
-					contents = header + '\n' +  contents[endOfHeader+len(BANNER)+2:]
+					contents = header + '\n' +  contents[endOfHeader+len(bannerEnd)+1:]
 				else:
 					contents = header + '\n' + contents
 				for key in SEARCH_AND_REPLACE:
@@ -39,6 +44,11 @@ def add_file_headers_and_do_search_and_replace():
 				ff = open(fpath, 'w')
 				ff.write(contents)
 				ff.close()
+			
+			if extension in CPP_EXTENSIONS and f not in EXCEPTIONS:
+				modify(BANNER_CPP_START, BANNER_CPP_END, commentStarter='* ')
+			if extension in PYTHON_EXTENSIONS and f not in EXCEPTIONS:
+				modify(BANNER_PYTHON, BANNER_PYTHON, commentStarter='# ')
 
 def run_tests():
 	print "Running test suite..."
