@@ -65,7 +65,8 @@ def push_to_google_code():
 
 def make_source_distribution():
 	print "Making source distribution file..."
-	os.system('python2.7 setup.py sdist --formats=zip')
+	fail
+	#os.system('python2.7 setup.py sdist --formats=zip')
 
 def make_pdf_sphinx_documentation():
 	print "Making pdf documentation..."

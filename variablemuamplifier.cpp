@@ -4,7 +4,7 @@
 * 
 * variablemuamplifier.cpp
 * 
-* By Peter Raffensperger 10 July 2012
+* By Peter Raffensperger 11 March 2014
 * 
 * Reference:
 * Toward a Wave Digital Filter Model of the Fairchild 670 Limiter, Raffensperger, P. A., (2012). 
